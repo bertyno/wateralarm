@@ -1,0 +1,52 @@
+
+insert into T_USER (ID, NAME) values (1,'Keith and Keri Donald');
+insert into T_USER (ID, NAME) values (2,'Dollie R. Adams');
+insert into T_USER (ID, NAME) values (3,'Cornelia J. Andresen');
+insert into T_USER (ID, NAME) values (4,'Coral Villareal Betancourt');
+insert into T_USER (ID, NAME) values (5,'Chad I. Cobbs');
+insert into T_USER (ID, NAME) values (6,'Michael C. Feller');
+insert into T_USER (ID, NAME) values (7,'Michael J. Grover');
+insert into T_USER (ID, NAME) values (8,'John C. Howard');
+insert into T_USER (ID, NAME) values (9,'Ida Ketterer');
+insert into T_USER (ID, NAME) values (10,'Laina Ochoa Lucero');
+insert into T_USER (ID, NAME) values (11,'Wesley M. Mayo');
+insert into T_USER (ID, NAME) values (12,'Leslie F. Mcclary');
+insert into T_USER (ID, NAME) values (13,'John D. Mudra');
+insert into T_USER (ID, NAME) values (14,'Pietronella J. Nielsen');
+insert into T_USER (ID, NAME) values (15,'John S. Oleary');
+insert into T_USER (ID, NAME) values (16,'Glenda D. Smith');
+insert into T_USER (ID, NAME) values (17,'Willemina O. Thygesen');
+insert into T_USER (ID, NAME) values (18,'Antje Vogt');
+insert into T_USER (ID, NAME) values (19,'Julia Weber');
+insert into T_USER (ID, NAME) values (20,'Mark T. Williams');
+insert into T_USER (ID, NAME) values (21,'Christine J. Wilson');
+                                      
+insert into T_PLANT (USER_ID, NAME) values (0, 'My plant');
+insert into T_PLANT (USER_ID, NAME) values (1, 'My other plant');
+insert into T_PLANT (USER_ID, NAME) values (2, 'Fulanito');
+insert into T_PLANT (USER_ID, NAME) values (3, 'Menganito');
+insert into T_PLANT (USER_ID, NAME) values (4, 'Setanito');
+insert into T_PLANT (USER_ID, NAME) values (5, 'Este');
+insert into T_PLANT (USER_ID, NAME) values (6, 'El otro');
+insert into T_PLANT (USER_ID, NAME) values (7, 'El de la moto');
+insert into T_PLANT (USER_ID, NAME) values (8, '');
+insert into T_PLANT (USER_ID, NAME) values (9, '');
+insert into T_PLANT (USER_ID, NAME) values (10, '1234123412340010');
+insert into T_PLANT (USER_ID, NAME) values (11, '1234123412340011');
+insert into T_PLANT (USER_ID, NAME) values (12, '1234123412340012');
+insert into T_PLANT (USER_ID, NAME) values (13, '1234123412340013');
+insert into T_PLANT (USER_ID, NAME) values (14, '1234123412340014');
+insert into T_PLANT (USER_ID, NAME) values (15, '1234123412340015');
+insert into T_PLANT (USER_ID, NAME) values (16, '1234123412340016');
+insert into T_PLANT (USER_ID, NAME) values (17, '1234123412340017');
+insert into T_PLANT (USER_ID, NAME) values (18, '1234123412340018');
+insert into T_PLANT (USER_ID, NAME) values (19, '1234123412340019');
+insert into T_PLANT (USER_ID, NAME) values (20, '1234123412340020');
+
+insert into T_RECORD (R_DATE, HUMIDITY, PLANT_ID) values (CURRENT_DATE(),10, 1 );
+insert into T_RECORD (R_DATE, HUMIDITY, PLANT_ID) values (CURRENT_DATE(),15, 1 );
+insert into T_RECORD (R_DATE, HUMIDITY, PLANT_ID) values (CURRENT_DATE(),20, 1 );
+insert into T_RECORD (R_DATE, HUMIDITY, PLANT_ID) values (CURRENT_DATE(),30, 1 );
+insert into T_RECORD (R_DATE, HUMIDITY, PLANT_ID) values (CURRENT_DATE(),40, 1 );
+insert into T_RECORD (R_DATE, HUMIDITY, PLANT_ID) values ('9999-12-31',50, 1 );
+
