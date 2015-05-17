@@ -30,6 +30,7 @@ cf bind-service wateralarm myrabbi
 cf restage wateralarm
 ```
 7) Execute the sql schema in wateralarm/src/test/resources/testdb/schema-mysql.sql with your favorite mysql client
+
 8) Visit the url http://wateralarm.cfapps.io/
 
 9) Create a new user with a valid email
