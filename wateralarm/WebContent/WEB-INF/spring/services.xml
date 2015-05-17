@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/rabbit 
+							http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/ad_d54f7a5a06939a8" />
+		<property name="username" value="b6ad4a03f000b5" />
+		<property name="password" value="8f7c5547" />
+	</bean>
+	
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="wateryourplant@yourplantisdry.com" />
+		<property name="subject" value="Water you plant!" />
+	</bean>
+
+	<!-- Gmail SMTP server properties -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="wateralarmb" />
+		<property name="password" value="cloudcompu" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	
+
+	<rabbit:connection-factory id="rabbitConnectionFactory"
+		host="tiger.cloudamqp.com" port="5672" virtual-host="bxtwxgom" username="bxtwxgom"
+		password="G6zTyITDxvk2z-k6wARxgnNHepmmICjw" />
+
+	<rabbit:template id="rabbitTemplate"
+		connection-factory="rabbitConnectionFactory" />
+
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+	<rabbit:queue name="plantsToWaterQueue" id="plantsToWaterQueue" />
+
+	<rabbit:fanout-exchange name="plantsFanout">
+		<rabbit:bindings>
+			<rabbit:binding queue="plantsToWaterQueue" />
+
+		</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+
+	<rabbit:listener-container
+		connection-factory="rabbitConnectionFactory">
+		<rabbit:listener queue-names="plantsToWaterQueue" ref="humidtyMsgHandler" />
+	</rabbit:listener-container>
+
+	<bean id="humidtyMsgHandler" class="rabbit.HumidityMsgHandler"/>
+	
+ 
+</beans>
