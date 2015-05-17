@@ -29,16 +29,17 @@ cf bind-service wateralarm myrabbi
 ```
 cf restage wateralarm
 ```
-7) Visit the url http://wateralarm.cfapps.io/
+7) Execute the sql schema in wateralarm/src/test/resources/testdb/schema-mysql.sql with your favorite mysql client
+8) Visit the url http://wateralarm.cfapps.io/
 
-8) Create a new user with a valid email
+9) Create a new user with a valid email
 
-9)Login with the user you have just created
+10)Login with the user you have just created
 
-10) Go to the link "Edit User (to add plants)"
+11) Go to the link "Edit User (to add plants)"
 
-11) Create a plant with a name
+12) Create a plant with a name
 
-12) Wait 5 minutes to get an email reminding you need to water your plant
+13) Wait 5 minutes to get an email reminding you need to water your plant
 
 
