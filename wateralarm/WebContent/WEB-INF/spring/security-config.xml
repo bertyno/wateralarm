@@ -8,9 +8,9 @@
                            http://www.springframework.org/schema/util/spring-util.xsd
                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<security:http access-denied-page="/denied.jsp"
+	<security:http access-denied-page="/denied.jsp" 
 		use-expressions="true">
-		<security:form-login login-page="/login.jsp"
+		<security:form-login login-page="/login.jsp" 
 			authentication-failure-url="/login.jsp?login_error=true" />
 		<!-- -->
 		<security:intercept-url pattern="/wateralarm/newUser*" access="isAnonymous()"/>
