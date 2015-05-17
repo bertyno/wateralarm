@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/jdbc
+							http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+							http://www.springframework.org/schema/context 
+							http://www.springframework.org/schema/context/spring-context-3.0.xsd
+							http://www.springframework.org/schema/rabbit 
+							http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+
+	<!-- Configuration to support system testing the rewards application. -->
+
+	<!-- Imports application configuration -->
+	<!-- <import resource="classpath:wateralarm/internal/application-config.xml"/> -->
+
+	<import
+		resource="file:/Users/bjalonmontanes/MyThings/MSc Cloud Computing/Course/Semester_2/App. Development Frameworks/wateralarm/wateralarm/WebContent/WEB-INF/spring/scheduled-tasks.xml" />
+
+	<!-- Creates an in-memory "rewards" database populated with test data for 
+		fast testing -->
+	<jdbc:embedded-database id="dataSource">
+		<jdbc:script
+			location="file:/Users/bjalonmontanes/MyThings/MSc Cloud Computing/Course/Semester_2/App. Development Frameworks/wateralarm/wateralarm/src/test/java/testdb/schema.sql" />
+		<jdbc:script
+			location="file:/Users/bjalonmontanes/MyThings/MSc Cloud Computing/Course/Semester_2/App. Development Frameworks/wateralarm/wateralarm/src/test/java/testdb/test-data.sql" />
+	</jdbc:embedded-database>
+
+	<context:component-scan base-package="repository,mvc,rabbit" />
+
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="wateryourplant@yourplantisdry.com" />
+		<property name="subject" value="Water you plant!" />
+	</bean>
+
+	<!-- Gmail SMTP server properties -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="wateralarmb" />
+		<property name="password" value="cloudcompu" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	
+
+	<rabbit:connection-factory id="rabbitConnectionFactory"
+		host="localhost" port="5672" virtual-host="/" username="guest"
+		password="guest" />
+
+	<rabbit:template id="rabbitTemplate"
+		connection-factory="rabbitConnectionFactory" />
+
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+	<rabbit:queue name="plantsToWaterQueue" id="plantsToWaterQueue" />
+
+	<rabbit:fanout-exchange name="plantsFanout">
+		<rabbit:bindings>
+			<rabbit:binding queue="plantsToWaterQueue" />
+
+		</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+
+	<rabbit:listener-container
+		connection-factory="rabbitConnectionFactory">
+		<rabbit:listener queue-names="plantsToWaterQueue" ref="humidtyMsgHandler" />
+	</rabbit:listener-container>
+
+	<bean id="humidtyMsgHandler" class="rabbit.HumidityMsgHandler">
+
+
+
+	</bean>
+
+
+</beans>
