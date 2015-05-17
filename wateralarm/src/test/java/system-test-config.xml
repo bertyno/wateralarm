@@ -18,15 +18,15 @@
 	<!-- <import resource="classpath:wateralarm/internal/application-config.xml"/> -->
 
 	<import
-		resource="classpath:scheduled-tasks.xml" />
+		resource="classpath:/scheduled-tasks.xml" />
 
 	<!-- Creates an in-memory "rewards" database populated with test data for 
 		fast testing -->
 	<jdbc:embedded-database id="dataSource">
 		<jdbc:script
-			location="classpath:testdb/schema.sql" />
+			location="classpath:/testdb/schema.sql" />
 		<jdbc:script
-			location="classpath:testdb/test-data.sql" />
+			location="classpath:/testdb/test-data.sql" />
 	</jdbc:embedded-database>
 
 	<context:component-scan base-package="repository,mvc,rabbit" />
